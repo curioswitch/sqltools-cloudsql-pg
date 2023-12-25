@@ -8,7 +8,6 @@
   },
   "publisher": "curioswitch",
   "license": "MIT",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/curioswitch/vscode-sqltools-cloudsql-pg.git"
@@ -35,6 +34,7 @@
     "Formatters",
     "Other"
   ],
+  "pricing": "Free",
   "extensionDependencies": [
     "mtxr.sqltools"
   ],
@@ -44,16 +44,25 @@
     "onCommand:sqltools.*"
   ],
   "main": "./out/extension.js",
+  "vsce": {
+    "dependencies": false,
+    "useYarn": false
+  },
   "scripts": {
     "format": "prettier --write .",
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "yarn run build",
+    "vscode:package": "vsce package --allow-star-activation",
+    "build": "rimraf out && yarn run compile:ext && yarn run compile:ls",
+    "esbuild": "esbuild --platform=node --tsconfig=./tsconfig.json --external:vscode --log-level=error --color=true --format=cjs",
+    "compile:ext": "yarn run esbuild --bundle ./src/extension.ts --outfile=./out/extension.js --target=es2017 --define:process.env.PRODUCT=\"'ext'\"",
+    "compile:ls": "yarn run esbuild --bundle ./src/ls/plugin.ts --outfile=./out/ls/plugin.js --target=es2015 --define:process.env.PRODUCT=\"'ls'\"",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./"
   },
   "dependencies": {
     "@google-cloud/cloud-sql-connector": "^1.2.1",
-    "@sqltools/base-driver": "latest",
-    "@sqltools/types": "latest",
+    "@sqltools/base-driver": "^0.1.11",
+    "@sqltools/types": "^0.1.7",
     "google-auth-library": "^9.4.1",
     "lodash": "^4.17.19",
     "pg": "^8.2.1",
@@ -66,7 +75,11 @@
     "@types/pg": "^8.10.9",
     "@types/uuid": "^9.0.7",
     "@types/vscode": "^1.42.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.19.10",
     "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }
