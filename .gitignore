@@ -1,0 +1,7 @@
+.envrc
+.vscode
+yarn-error.log
+node_modules
+out
+.DS_Store
+

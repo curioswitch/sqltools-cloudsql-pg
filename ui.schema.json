@@ -1,0 +1,42 @@
+{
+  "ui:order": [
+    "instanceConnectionName",
+    "database",
+    "username",
+    "usePassword",
+    "password",
+    "impersonatedServiceAccount",
+    "credentialsFile",
+    "pgOptions"
+  ],
+  "password": { "ui:widget": "password" },
+  "askForPassword": { "ui:widget": "hidden" },
+  "instanceConnectionName": {
+    "ui:help": "Instance to connect to in the form project:region:instance."
+  },
+  "impersonatedServiceAccount": {
+    "ui:help": "Service account to impersonate when connecting. Default is to not impersonate any service account."
+  },
+  "credentialsFile": {
+    "ui:widget": "file",
+    "ui:help": "Path to GCP credentials file to use to connect. Default is Application Default Credentials."
+  },
+  "pgOptions": {
+    "ui:order": ["*"],
+    "statement_timeout": {
+      "ui:help": "Number of milliseconds before a statement in query will time out. Default is no timeout"
+    },
+    "query_timeout": {
+      "ui:help": "Number of milliseconds before a query call will timeout. Default is no timeout"
+    },
+    "connectionTimeoutMillis": {
+      "ui:help": "Number of milliseconds to wait before timing out when connecting a new client. By default this is 0 which means no timeout"
+    },
+    "idleTimeoutMillis": {
+      "ui:help": "Number of milliseconds a client must sit idle in the pool and not be checked out before it is disconnected from the backend and discarded. Default is 10000 (10 seconds) - set to 0 to disable auto-disconnection of idle clients"
+    },
+    "max": {
+      "ui:help": "Maximum number of clients the pool should contain. By default this is set to 10."
+    }
+  }
+}
