@@ -2,7 +2,7 @@
 
 This is a lightweight fork of the [PostgreSQL driver from SQLTools][1] to integrate with Google Cloud SQL
 using [cloud-sql-nodejs-connector][2].
-Connect to youur Cloud SQL PostgreSQL database without using a proxy.
+Connect to your Cloud SQL PostgreSQL database without using a proxy.
 
 ## Features
 
